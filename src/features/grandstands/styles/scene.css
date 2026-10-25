@@ -1,0 +1,238 @@
+.page3d .page-heading h1 {
+  font-size: 44px;
+}
+.camera3d {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin: 0 0 20px;
+  color: #6D6875;
+  font-size: 11px;
+}
+.camera3d>span,.camera3d>div,.camera3d label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.camera3d>div {
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+.camera3d button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #FFFEF8;
+  border: 1px solid #DDD7CE;
+  border-radius: 7px;
+  padding: 8px 10px;
+  font-size: 10px;
+}
+.camera3d button:hover {
+  border-color: #B5838D;
+  color: #805460;
+}
+.camera3d input {
+  width: 85px;
+  accent-color: #B5838D;
+}
+.scene3d-wrap {
+  margin: 14px -24px 20px;
+  background: #f8f5f2;
+}
+.scene3d {
+  display: block;
+  width: 100%;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.scene3d:active {
+  cursor: grabbing;
+}
+.scene3d-wrap>p {
+  padding: 20px;
+  font-size: 12px;
+}
+.scene3d-wrap>p a {
+  text-decoration: underline;
+}
+.badge3d {
+  font-size: 8px;
+  letter-spacing: 1px;
+  background: #F2E4E5;
+  color: #805460;
+  padding: 6px;
+  border-radius: 5px;
+}
+.card3d {
+  contain: layout;
+}
+.page3d .stadium-candidate h2 {
+  text-transform: none;
+}
+.page3d .stadium-votes {
+  margin-top: 18px;
+}
+@media(max-width:900px) {
+  .scene3d-wrap {
+    margin-left: -19px;
+    margin-right: -19px;
+  }
+  .page3d .stadiums-grid {
+    grid-template-columns: 1fr;
+  }
+  .camera3d>div {
+    margin-left: 0;
+  }
+  .page3d .page-heading h1 {
+    font-size: 35px;
+  }
+}
+@media(max-width:550px) {
+  .page3d .page-heading h1 {
+    font-size: 31px;
+  }
+  .camera3d {
+    gap: 12px;
+  }
+  .camera3d>div {
+    width: 100%;
+    gap: 6px;
+  }
+  .camera3d button {
+    padding: 8px;
+    font-size: 9px;
+  }
+  .badge3d {
+    font-size: 7px;
+  }
+  .card3d .stadium-occupancy {
+    font-size: 9px;
+  }
+}
+.entrance-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 17px;
+  font-size: 11px;
+  color: #6D6875;
+  line-height: 1.7;
+}
+.entrance-note .refresh {
+  white-space: nowrap;
+}
+@media(max-width:550px) {
+  .entrance-note {
+    align-items: flex-start;
+    font-size: 10px;
+  }
+  .entrance-note .refresh {
+    font-size: 10px;
+    padding: 7px;
+  }
+}
+.stadium-waiting {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 22px 25px;
+  margin: 0 0 22px;
+  background: #F2E4E5;
+  border: 1px solid #DEC3C9;
+  border-radius: 17px;
+  color: #805460;
+}
+.stadium-waiting>svg {
+  flex-shrink: 0;
+}
+.stadium-waiting strong {
+  font-size: 17px;
+  letter-spacing: -.4px;
+}
+.stadium-waiting p {
+  font-size: 12px;
+  line-height: 1.8;
+  margin: 6px 0;
+}
+.stadium-waiting small {
+  font-size: 10px;
+  color: #6D6875;
+}
+@media(max-width:550px) {
+  .stadium-waiting {
+    padding: 17px;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .stadium-waiting strong {
+    font-size: 15px;
+  }
+  .stadium-waiting p {
+    font-size: 11px;
+  }
+  .stadium-waiting>svg {
+    width: 22px;
+  }
+}
+.stadiums-grid+.camera3d {
+  margin-top: 22px;
+}
+.stadium-live-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.stadium-live-row>.stadium-live-info {
+  margin: 0;
+}
+.stadium-live-row>.last-check {
+  margin-left: auto;
+}
+.stadium-live-info>span:not(.status) {
+  font-size: 13px;
+}
+.stadium-live-row .stadium-live-info,.stadium-live-row .status,.stadium-live-row .stadium-live-info>span:not(.status),.stadium-live-row .last-check {
+  font-size: 14px;
+}
+.page3d .stadium-occupancy {
+  font-size: 14px;
+}
+.page3d .stadium-votes>span {
+  font-size: 14px;
+}
+.page3d .seat-remainder {
+  font-size: 14px;
+}
+@media(max-width:550px) {
+  .stadium-live-row>.last-check {
+    margin-left: 0;
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
+.stadium-national {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.stadiums-page footer>a,.stadiums-page footer>span {
+  font-size: 12px;
+}
+.stadiums-page footer {
+  margin-top: 40px;
+}
+.page3d .camera3d,.page3d .camera3d button,.page3d .camera3d label {
+  font-size: 14px;
+}
+.page3d .camera3d button {
+  padding: 9px 12px;
+}
+.page3d .badge3d {
+  font-size: 12px;
+}

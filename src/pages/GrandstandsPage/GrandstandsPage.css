@@ -1,0 +1,223 @@
+.stadiums-page {
+  max-width: var(--page-max-width);
+}
+.stadiums-page .page-heading {
+  margin-bottom: 28px;
+}
+.stadium-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.stadium-live-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 11px;
+  color: #6D6875;
+  margin: 0 0 20px;
+  flex-wrap: wrap;
+}
+.stadiums-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.stadium-card {
+  --crowd: #DC2626;
+  --crowd-bg: #FFF1F2;
+  border: 1px solid #DDD7CE;
+  background: #FFFEF8;
+  border-radius: 24px;
+  padding: 24px;
+  overflow: hidden;
+  box-shadow: 0 7px 0 #6D687508;
+}
+.stadium-22 {
+  --crowd: #15803D;
+  --crowd-bg: #F0FDF4;
+}
+.stadium-candidate {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.stadium-candidate>div {
+  flex: 1;
+}
+.stadium-candidate>div>span {
+  font-size: 11px;
+  color: var(--crowd);
+}
+.stadium-candidate h2 {
+  text-transform: capitalize;
+  font-family: 'Inter',sans-serif;
+  font-size: 22px;
+  margin: 3px 0 0;
+  letter-spacing: -.6px;
+}
+.stadium-votes {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+.stadium-votes strong {
+  font-family: 'Inter',sans-serif;
+  font-size: 36px;
+  letter-spacing: -1.5px;
+  color: var(--crowd);
+}
+.stadium-votes>span {
+  font-size: 11px;
+  color: #6D6875;
+}
+.stadium-occupancy {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 10px;
+  color: #6D6875;
+}
+.stadium-occupancy>span:first-child {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--crowd);
+  font-weight: 600;
+}
+.stadium-occupancy i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--crowd);
+}
+.stadium-meter {
+  height: 5px;
+  background: #E8E1E3;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.stadium-meter>div {
+  height: 100%;
+  background: var(--crowd);
+  transition: width .7s;
+}
+.seat-remainder {
+  font-size: 11px;
+  color: #6D6875;
+  line-height: 1.7;
+  margin: 0;
+}
+.stadium-scale {
+  margin: 30px 0;
+  background: #F2E4E5;
+  border: 1px solid #DEC3C9;
+  border-radius: 18px;
+  padding: 25px 28px;
+  color: #6D6875;
+}
+.stadium-scale>div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #805460;
+}
+.stadium-scale h2 {
+  font-family: 'Inter',sans-serif;
+  font-size: 17px;
+  margin: 0;
+}
+.stadium-scale p {
+  font-size: 12px;
+  line-height: 1.9;
+  max-width: 980px;
+}
+.stadium-scale a {
+  font-size: 11px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: #805460;
+}
+.stadiums-page footer>a {
+  font-size: 11px;
+  color: #805460;
+}
+@media(max-width:900px) {
+  .stadium-card {
+    padding: 19px;
+  }
+  .stadium-candidate h2 {
+    font-size: 18px;
+  }
+  .stadium-votes strong {
+    font-size: 30px;
+  }
+  .stadiums-grid {
+    gap: 15px;
+  }
+}
+@media(max-width:650px) {
+  .stadiums-grid {
+    grid-template-columns: 1fr;
+  }
+  .stadiums-page h1 {
+    font-size: 35px;
+  }
+  .stadium-toolbar {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .stadium-toolbar .update-controls {
+    margin-left: 0;
+  }
+  .stadium-candidate h2 {
+    font-size: 21px;
+  }
+  .stadium-votes strong {
+    font-size: 35px;
+  }
+  .stadium-live-info {
+    gap: 10px;
+    line-height: 1.8;
+  }
+  .stadium-scale {
+    padding: 21px;
+  }
+  .stadium-scale h2 {
+    font-size: 15px;
+  }
+  .stadium-occupancy {
+    font-size: 10px;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  .stadium-meter>div {
+    transition: none;
+  }
+}
+.stadium-nav {
+  display: flex;
+  align-items: center;
+}
+@media(max-width:550px) {
+  .header nav {
+    gap: 9px;
+  }
+  .header-inner {
+    gap: 10px;
+  }
+  .header .brand-name {
+    font-size: 15px;
+  }
+  .header .nav {
+    font-size: 9px;
+  }
+}

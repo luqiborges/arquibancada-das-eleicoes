@@ -1,0 +1,38 @@
+.trophy-selected {
+  border-color: #d6ad45;
+  box-shadow: 0 0 0 2px #e8af2924;
+}
+.trophy-selected .badge3d {
+  background: #fff0c5;
+  color: #805813;
+}
+.victory3d {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #FFF3CF;
+  border: 1px solid #E8CD83;
+  border-radius: 14px;
+  padding: 18px 22px;
+  margin: 0 0 22px;
+  color: #805813;
+}
+.victory3d strong {
+  font-size: 15px;
+}
+.victory3d p {
+  font-size: 11px;
+  line-height: 1.7;
+  margin: 5px 0 0;
+}
+.victory3d>svg {
+  flex-shrink: 0;
+}
+@media(max-width:550px) {
+  .victory3d {
+    padding: 14px;
+  }
+  .victory3d strong {
+    font-size: 13px;
+  }
+}
