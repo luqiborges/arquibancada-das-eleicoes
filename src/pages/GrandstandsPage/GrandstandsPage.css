@@ -65,10 +65,11 @@
   letter-spacing: -.6px;
 }
 .stadium-votes {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: baseline;
-  flex-wrap: wrap;
-  gap: 10px;
+  column-gap: 10px;
+  row-gap: 2px;
   margin-top: 22px;
 }
 .stadium-votes strong {
@@ -78,8 +79,21 @@
   color: var(--crowd);
 }
 .stadium-votes>span {
+  grid-column: 1;
+  grid-row: 2;
   font-size: 11px;
   color: #6D6875;
+}
+.stadium-vote-percent {
+  grid-column: 2;
+  grid-row: 1;
+  text-align: right;
+  white-space: nowrap;
+}
+@media(max-width:380px) {
+  .stadium-card .stadium-votes strong {
+    font-size: 28px;
+  }
 }
 .stadium-occupancy {
   display: flex;

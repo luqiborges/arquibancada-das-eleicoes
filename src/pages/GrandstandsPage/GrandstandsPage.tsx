@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Clock3, Info, RotateCcw, Trophy } from 'lucide-react';
+import { Box, Info, RotateCcw, Trophy } from 'lucide-react';
 
 import SiteFooter from '../../components/SiteFooter/SiteFooter';
 import DataSourceBanner from '../../components/DataSourceBanner';
@@ -74,21 +74,13 @@ export default function GrandstandsPage({ lighting }: { lighting: Daylight }) {
           <p>A taça chegou ao gramado! A confirmação veio do TSE; a contagem de votos continua sendo atualizada.</p>
         </div>
       </aside>}
-      <aside className="stadium-waiting" role="status">
-        <Clock3 size={26} aria-hidden="true" />
-        <div>
-          <strong>Respira, torcida! A votação vai até as 19h.</strong>
-          <p>Segundo a Veja, o horário de votação foi prorrogado em todo o Brasil, até as 19h de Brasília. Enquanto isso, seguimos acompanhando os dados disponibilizados pelo TSE.</p>
-          <a href="https://veja.abril.com.br/brasil/zanin-prorroga-votacao-em-todo-o-brasil-para-19h/" target="_blank" rel="noopener noreferrer">Leia a notícia na Veja</a>
-        </div>
-      </aside>
       <div className="stadiums-grid">
         {candidates.map(candidate => {
           const known = !!result?.candidates.some(c => c.number === candidate.number);
           const selected = winner === candidate.number;
           const votes = candidate.votes;
           const count = occupancy(votes);
-          const seatProgress = known ? count.filled === SEAT_COUNT ? 100 : count.remainder / VOTES_PER_SEAT * 100 : 0;
+          const seatProgress = known ? count.filled / SEAT_COUNT * 100 : 0;
           return <article
             key={candidate.number}
             className={`stadium-card stadium-${candidate.number} card3d ${selected ? 'trophy-selected' : ''}`}
@@ -110,6 +102,9 @@ export default function GrandstandsPage({ lighting }: { lighting: Daylight }) {
                 {known ? fmt(votes) : '—'}
               </strong>
               <span>votos contabilizados</span>
+              <strong className="stadium-vote-percent" aria-label="Percentual dos votos válidos">
+                {known ? `${candidate.percent.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%` : '—'}
+              </strong>
             </div>
             <CelebratingStadium
               filled={known ? count.filled : 0}
@@ -129,11 +124,11 @@ export default function GrandstandsPage({ lighting }: { lighting: Daylight }) {
             <div
               className="stadium-meter"
               role="progressbar"
-              aria-label={count.filled === SEAT_COUNT ? 'Capacidade visual preenchida' : 'Votos para a próxima pessoinha'}
+              aria-label="Ocupação da arquibancada"
               aria-valuemin={0}
               aria-valuemax={100}
               aria-valuenow={known ? seatProgress : undefined}
-              aria-valuetext={!known ? 'Aguardando os dados oficiais do TSE' : count.filled === SEAT_COUNT ? 'Capacidade visual preenchida' : `${fmt(count.remainder)} de ${fmt(VOTES_PER_SEAT)} votos`}
+              aria-valuetext={!known ? 'Aguardando os dados oficiais do TSE' : `${fmt(count.filled)} de ${fmt(SEAT_COUNT)} lugares ocupados`}
             >
               <div style={{ width: `${seatProgress}%` }} />
             </div>

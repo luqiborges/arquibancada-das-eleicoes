@@ -71,9 +71,9 @@ Os candidatos, partidos, votos, fotos e a indicação de eleito vêm do TSE. Nen
 
 Uma faixa informativa abaixo dos dois estádios mostra a legenda fixa **1 pessoinha equivale a 100 mil votos**, inclusive enquanto aguarda os dados oficiais.
 
-A barrinha acima da mensagem da próxima pessoinha representa o progresso dentro do lote atual de 100 mil votos. Com 193.574 votos, ela fica em 93,574% e faltam 6.426 votos. Ao completar o lote, uma pessoa ocupa seu lugar e a barra reinicia; ao atingir os 800 lugares, ela permanece cheia. Sem resultado oficial, fica vazia e informa que aguarda os dados.
+Cada estádio mostra o percentual de votos válidos informado pelo TSE à direita do total de votos contabilizados, na mesma cor do total. Sem dados oficiais do candidato, ambos exibem um travessão.
 
-As arquibancadas exibem um aviso sobre a prorrogação da votação de 25/10/2026 até as 19h de Brasília, atribuída à Veja e com link para a notícia. O aviso substitui a mensagem de espera pelos portões e não altera as consultas nem as regras de abertura da cena.
+A barrinha abaixo da quantidade de pessoinhas representa a ocupação dos 800 lugares do estádio. Com 10 pessoinhas, ela fica em 1,25%; com 800, fica cheia. Sem resultado oficial, fica vazia e informa que aguarda os dados. O texto abaixo continua informando quantos votos faltam para a próxima pessoinha.
 
 A tela inicial `/` é a página oficial das arquibancadas em 3D. A aba **Papo sério**, em `/papo-serio`, contém o placar, os filtros e os resultados dos estados. Endereços antigos ou desconhecidos redirecionam para `/`, preservando parâmetros e hash, sem aliases individuais. Há 800 assentos por candidato, cada um representando 100 mil votos: capacidade visual de 80 milhões. O total exato, os votos restantes para o próximo assento e eventuais votos além da capacidade continuam visíveis.
 
