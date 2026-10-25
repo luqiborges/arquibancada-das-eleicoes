@@ -98,6 +98,8 @@
 .stadium-occupancy i {
   width: 6px;
   height: 6px;
+  flex-shrink: 0;
+  transform: translateY(1px);
   border-radius: 50%;
   background: var(--crowd);
 }
