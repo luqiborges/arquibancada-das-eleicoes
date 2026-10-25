@@ -11,7 +11,7 @@ import type { Daylight } from '../../features/grandstands/scene/daylight';
 import LastChecked from '../../components/LastChecked';
 import { officialWinner } from '../../domain/election/winner';
 import type { Candidate } from '../../domain/election/types';
-import { FIRST_ROUND, occupancy, SEAT_COUNT } from '../../features/grandstands/scale';
+import { FIRST_ROUND, occupancy, SEAT_COUNT, VOTES_PER_SEAT } from '../../features/grandstands/scale';
 import { DEFAULT_CAMERA } from '../../features/grandstands/scene/geometry';
 import { APURACAO_START_AT, isEntranceOpen } from '../../domain/election/start';
 
@@ -74,19 +74,21 @@ export default function GrandstandsPage({ lighting }: { lighting: Daylight }) {
           <p>A taça chegou ao gramado! A confirmação veio do TSE; a contagem de votos continua sendo atualizada.</p>
         </div>
       </aside>}
-      {!gateOpen && <aside className="stadium-waiting" role="status">
-        <Clock3 size={26} />
+      <aside className="stadium-waiting" role="status">
+        <Clock3 size={26} aria-hidden="true" />
         <div>
-          <strong>Segura a ansiedade! A torcida já tá na fila.</strong>
-          <p>Às 17h de Brasília, os portões se abrem. Aí é só acompanhar cada voto ganhando seu lugar na arquibancada!</p>
+          <strong>Respira, torcida! A votação vai até as 19h.</strong>
+          <p>Segundo a Veja, o horário de votação foi prorrogado em todo o Brasil, até as 19h de Brasília. Enquanto isso, seguimos acompanhando os dados disponibilizados pelo TSE.</p>
+          <a href="https://veja.abril.com.br/brasil/zanin-prorroga-votacao-em-todo-o-brasil-para-19h/" target="_blank" rel="noopener noreferrer">Leia a notícia na Veja</a>
         </div>
-      </aside>}
+      </aside>
       <div className="stadiums-grid">
         {candidates.map(candidate => {
           const known = !!result?.candidates.some(c => c.number === candidate.number);
           const selected = winner === candidate.number;
           const votes = candidate.votes;
           const count = occupancy(votes);
+          const seatProgress = known ? count.filled === SEAT_COUNT ? 100 : count.remainder / VOTES_PER_SEAT * 100 : 0;
           return <article
             key={candidate.number}
             className={`stadium-card stadium-${candidate.number} card3d ${selected ? 'trophy-selected' : ''}`}
@@ -121,14 +123,22 @@ export default function GrandstandsPage({ lighting }: { lighting: Daylight }) {
               lighting={lighting}
             />
             <div className="stadium-occupancy">
-              <span><i />{known ? fmt(count.filled) : '—'} pessoinhas na arquibancada</span>
+              <span><i />{known ? fmt(count.filled) : '—'} {known && count.filled === 1 ? 'pessoinha' : 'pessoinhas'} na arquibancada</span>
               <span>{SEAT_COUNT} lugares</span>
             </div>
-            <div className="stadium-meter">
-              <div style={{ width: `${known ? count.filled / SEAT_COUNT * 100 : 0}%` }} />
+            <div
+              className="stadium-meter"
+              role="progressbar"
+              aria-label={count.filled === SEAT_COUNT ? 'Capacidade visual preenchida' : 'Votos para a próxima pessoinha'}
+              aria-valuemin={0}
+              aria-valuemax={100}
+              aria-valuenow={known ? seatProgress : undefined}
+              aria-valuetext={!known ? 'Aguardando os dados oficiais do TSE' : count.filled === SEAT_COUNT ? 'Capacidade visual preenchida' : `${fmt(count.remainder)} de ${fmt(VOTES_PER_SEAT)} votos`}
+            >
+              <div style={{ width: `${seatProgress}%` }} />
             </div>
             <p className="seat-remainder">
-              {!known ? 'Aguardando os dados oficiais do TSE.' : count.overflow ? `Casa cheia! Mais ${fmt(count.overflow)} votos além da capacidade visual.` : count.remainder ? `Mais ${fmt(count.remainder)} votos rumo à próxima pessoinha.` : 'Uma pessoinha entra a cada 100 mil votos.'}
+              {!known ? 'Aguardando os dados oficiais do TSE.' : count.overflow ? `Casa cheia! Mais ${fmt(count.overflow)} votos além da capacidade visual.` : count.remainder ? `Faltam ${fmt(VOTES_PER_SEAT - count.remainder)} votos para a próxima pessoinha.` : 'Uma pessoinha entra a cada 100 mil votos.'}
             </p>
           </article>;
         })}

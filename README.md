@@ -69,6 +69,10 @@ Os candidatos, partidos, votos, fotos e a indicação de eleito vêm do TSE. Nen
 
 ## Arquibancadas
 
+A barrinha acima da mensagem da próxima pessoinha representa o progresso dentro do lote atual de 100 mil votos. Com 193.574 votos, ela fica em 93,574% e faltam 6.426 votos. Ao completar o lote, uma pessoa ocupa seu lugar e a barra reinicia; ao atingir os 800 lugares, ela permanece cheia. Sem resultado oficial, fica vazia e informa que aguarda os dados.
+
+As arquibancadas exibem um aviso sobre a prorrogação da votação de 25/10/2026 até as 19h de Brasília, atribuída à Veja e com link para a notícia. O aviso substitui a mensagem de espera pelos portões e não altera as consultas nem as regras de abertura da cena.
+
 A tela inicial `/` é a página oficial das arquibancadas em 3D. A aba **Papo sério**, em `/papo-serio`, contém o placar, os filtros e os resultados dos estados. Endereços antigos ou desconhecidos redirecionam para `/`, preservando parâmetros e hash, sem aliases individuais. Há 800 assentos por candidato, cada um representando 100 mil votos: capacidade visual de 80 milhões. O total exato, os votos restantes para o próximo assento e eventuais votos além da capacidade continuam visíveis.
 
 A escala inclui mais de 40% de folga sobre a maior votação do [boletim do primeiro turno do TSE com 99,99% totalizado](https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/flavio-bolsonaro-e-lula-vao-disputar-o-2o-turno-para-a-presidencia-da-republica). Esse recorte histórico serve somente como referência da escala.

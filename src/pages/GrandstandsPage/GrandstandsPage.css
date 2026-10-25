@@ -1,6 +1,12 @@
 .stadiums-page {
   max-width: var(--page-max-width);
 }
+.stadium-waiting a {
+  color: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .stadiums-page .page-heading {
   margin-bottom: 28px;
 }
