@@ -90,11 +90,6 @@
   text-align: right;
   white-space: nowrap;
 }
-@media(max-width:380px) {
-  .stadium-card .stadium-votes strong {
-    font-size: 28px;
-  }
-}
 .stadium-occupancy {
   display: flex;
   justify-content: space-between;
@@ -232,7 +227,12 @@
     font-size: 21px;
   }
   .stadium-votes strong {
-    font-size: 35px;
+    font-size: clamp(26px, 7vw, 32px);
+    letter-spacing: -1px;
+    white-space: nowrap;
+  }
+  .stadium-votes {
+    column-gap: 20px;
   }
   .stadium-live-info {
     gap: 10px;

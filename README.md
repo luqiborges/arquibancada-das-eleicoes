@@ -73,6 +73,8 @@ Uma faixa informativa abaixo dos dois estádios mostra a legenda fixa **1 pessoi
 
 Cada estádio mostra o percentual de votos válidos informado pelo TSE à direita do total de votos contabilizados, na mesma cor do total. Sem dados oficiais do candidato, ambos exibem um travessão.
 
+No celular, os números usam fonte menor e espaçamento entre total e percentual, mantendo os dois na mesma linha.
+
 A barrinha abaixo da quantidade de pessoinhas representa a ocupação dos 800 lugares do estádio. Com 10 pessoinhas, ela fica em 1,25%; com 800, fica cheia. Sem resultado oficial, fica vazia e informa que aguarda os dados. O texto abaixo continua informando quantos votos faltam para a próxima pessoinha.
 
 A tela inicial `/` é a página oficial das arquibancadas em 3D. A aba **Papo sério**, em `/papo-serio`, contém o placar, os filtros e os resultados dos estados. Endereços antigos ou desconhecidos redirecionam para `/`, preservando parâmetros e hash, sem aliases individuais. Há 800 assentos por candidato, cada um representando 100 mil votos: capacidade visual de 80 milhões. O total exato, os votos restantes para o próximo assento e eventuais votos além da capacidade continuam visíveis.
