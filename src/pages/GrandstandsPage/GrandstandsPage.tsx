@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Clock3, RotateCcw, Trophy } from 'lucide-react';
+import { Box, Clock3, Info, RotateCcw, Trophy } from 'lucide-react';
 
 import SiteFooter from '../../components/SiteFooter/SiteFooter';
 import DataSourceBanner from '../../components/DataSourceBanner';
@@ -143,6 +143,12 @@ export default function GrandstandsPage({ lighting }: { lighting: Daylight }) {
           </article>;
         })}
       </div>
+      <aside className="stadium-scale stadium-scale-legend" aria-label="Escala das arquibancadas">
+        <div className="stadium-scale-content">
+          <Info size={18} aria-hidden="true" />
+          <strong>1 pessoinha equivale a {fmt(VOTES_PER_SEAT / 1000)} mil votos</strong>
+        </div>
+      </aside>
       <section className="camera3d" aria-label="Controles da câmera">
         <span><Box size={15} /> Arraste qualquer estádio para girar os dois.</span>
         <div>

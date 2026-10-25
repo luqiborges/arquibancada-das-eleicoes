@@ -129,6 +129,34 @@
   padding: 25px 28px;
   color: #6D6875;
 }
+.stadium-scale.stadium-scale-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.stadium-scale-legend>.stadium-scale-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+  text-align: center;
+  color: inherit;
+}
+.stadium-scale-content>strong {
+  display: block;
+  line-height: 1.4;
+}
+.stadium-scale-content>svg {
+  display: block;
+  flex-shrink: 0;
+}
 .stadium-scale>div {
   display: flex;
   align-items: center;

@@ -69,6 +69,8 @@ Os candidatos, partidos, votos, fotos e a indicação de eleito vêm do TSE. Nen
 
 ## Arquibancadas
 
+Uma faixa informativa abaixo dos dois estádios mostra a legenda fixa **1 pessoinha equivale a 100 mil votos**, inclusive enquanto aguarda os dados oficiais.
+
 A barrinha acima da mensagem da próxima pessoinha representa o progresso dentro do lote atual de 100 mil votos. Com 193.574 votos, ela fica em 93,574% e faltam 6.426 votos. Ao completar o lote, uma pessoa ocupa seu lugar e a barra reinicia; ao atingir os 800 lugares, ela permanece cheia. Sem resultado oficial, fica vazia e informa que aguarda os dados.
 
 As arquibancadas exibem um aviso sobre a prorrogação da votação de 25/10/2026 até as 19h de Brasília, atribuída à Veja e com link para a notícia. O aviso substitui a mensagem de espera pelos portões e não altera as consultas nem as regras de abertura da cena.
