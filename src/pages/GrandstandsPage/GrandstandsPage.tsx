@@ -23,7 +23,7 @@ const fmt = (n: number) => n.toLocaleString('pt-BR');
 // 75% of the camera slider range (0.7 to 1.3).
 const initialCamera = { ...DEFAULT_CAMERA, zoom: 1.15 };
 
-export default function GrandstandsPage() {
+export default function GrandstandsPage({ showHeader = true }: { showHeader?: boolean }) {
   const [camera, setCamera] = useState(initialCamera);
   const [scheduledOpen, setScheduledOpen] = useState(() => isEntranceOpen(Date.now()));
   const { result, error, checked } = useLiveResult(true);
@@ -51,7 +51,7 @@ export default function GrandstandsPage() {
     };
   }, [scheduledOpen]);
   return <>
-    <SiteHeader activePage="grandstands" />
+    {showHeader && <SiteHeader activePage="grandstands" />}
     <main className="stadiums-page page3d">
       <div className="stadium-live-row">
         <div className="stadium-live-info" role="status">

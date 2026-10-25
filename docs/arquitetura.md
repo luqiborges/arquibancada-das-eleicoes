@@ -6,7 +6,7 @@ O mapa de pastas e os comportamentos do produto estão no [README](../README.md)
 
 `src/main.tsx` monta o React e carrega os estilos globais e o tema. `src/app/App.tsx` aplica a paleta oficial e carrega as páginas sob demanda com `lazy` e `Suspense`.
 
-O roteamento é feito pelo pathname, sem biblioteca de rotas. `src/app/routes.ts` normaliza a barra final e converte endereços antigos em `/`, preservando query string e hash. Links comuns carregam a página de destino; `replaceState` sozinho não funciona como navegação reativa. Rotas desconhecidas atualmente mostram as arquibancadas.
+O roteamento é feito pelo pathname, sem biblioteca de rotas. `src/app/routes.ts` normaliza a barra final e converte endereços antigos em `/`, preservando query string e hash. Nas páginas oficiais, `App` mantém `SiteHeader` fora do `Suspense` e intercepta cliques simples nos links do cabeçalho para navegar com `pushState` e estado React, sem recarregar o documento. O evento `popstate` sincroniza voltar e avançar. Cliques modificados mantêm o comportamento nativo dos links. `PageLoading` mostra blocos decorativos e um status acessível enquanto o módulo da página carrega; movimento reduzido desativa a pulsação. As páginas recebem `showHeader={false}` na composição oficial e mantêm seu cabeçalho próprio na prévia de cores. Rotas desconhecidas atualmente mostram as arquibancadas.
 
 | Endereço | Página | Responsabilidade |
 | --- | --- | --- |
@@ -57,7 +57,7 @@ As duas arenas representam os candidatos cadastrados em `FIRST_ROUND`. Antes dos
 
 `SiteHeader`, `SiteFooter`, `Brand`, `BrazilFlag`, `LastChecked`, `CandidateAvatar` e `DataSourceBanner` são compartilhados pelas páginas. Prefira alterar esses componentes a duplicar cabeçalho, rodapé ou avisos.
 
-Os estilos comuns ficam em `src/styles/global.css`, os de cada página junto dela e os da cena em `features/grandstands/styles`. A paleta e o contexto ficam em `src/theme/palettes.ts`; `theme.css` aplica as variáveis ao site. `ColorPreviewPage` fornece um contexto e variáveis próprios para a prévia, sem salvar uma preferência global.
+Os estilos comuns ficam em `src/styles/global.css`, os de cada página junto dela e os da cena em `features/grandstands/styles`. As abas em cápsula do cabeçalho são compartilhadas e estilizadas em `src/theme/theme.css`, com cores das variáveis da paleta e navegação abaixo da logo no mobile. A paleta e o contexto ficam em `src/theme/palettes.ts`; `theme.css` aplica as variáveis ao site. `ColorPreviewPage` fornece um contexto e variáveis próprios para a prévia, sem salvar uma preferência global.
 
 O CSS é global e ainda contém regras e sobrescritas acumuladas durante os ajustes visuais. A ordem dos imports e a especificidade importam: teste as duas páginas e a prévia ao alterar seletores compartilhados. Preserve os 14px dos textos de apoio, o alinhamento do cabeçalho com o conteúdo e o comportamento mobile do horário de atualização.
 

@@ -79,13 +79,13 @@ A comemoração com troféu e confetes depende de exatamente um candidato com o 
 
 O entorno tem árvores, canteiros, bandeirinhas, bancos, postes e quiosque. A câmera e o zoom são compartilhados entre as duas arenas. A cena usa geometria tridimensional projetada em Canvas, sem modelos externos. A preferência por movimento reduzido mantém a caminhada estática e mostra diretamente a pose final da comemoração. A aba oculta suspende o avanço das animações.
 
-Os modos de simulação e as páginas de teste foram removidos. Os antigos links `/estadios/trofeu`, `/estadios-3d/trofeu` e `/estadios/entorno` levam às arquibancadas ao vivo. Os testes automatizados de leitura dos dados e geometria permanecem disponíveis por `npm test`.
+Os modos de simulação e as páginas de teste foram removidos. O antigo endereço `/previa-header` redireciona para a página inicial. Os antigos links `/estadios/trofeu`, `/estadios-3d/trofeu` e `/estadios/entorno` levam às arquibancadas ao vivo. Os testes automatizados de leitura dos dados e geometria permanecem disponíveis por `npm test`.
 
 ## Hospedagem e visual
 
 Configure a hospedagem para servir `index.html` nas rotas da aplicação e nos aliases; o Vite já faz isso localmente. A tipografia usa Inter via Google Fonts com `display=swap` e alternativa sem serifa do sistema quando indisponível.
 
-A identidade oficial usa a logo fornecida em `src/assets/brand/logo-arquibancada.png`, exibida pelo componente `Brand` no cabeçalho e no rodapé do painel. O visual parte de **Papel e tinta**: fundo cinza-claro `#F5F5F7`, cartões brancos e texto grafite `#353139`. O vinho `#793947`, os fundos rosés e detalhes verdes acompanham as cores da logo. Vermelho e verde continuam identificando os candidatos. A paleta oficial fica em `src/theme/palettes.ts` e as regras compartilhadas de tema em `src/theme/theme.css`.
+A identidade oficial usa a logo fornecida em `src/assets/brand/logo-arquibancada.png`, exibida pelo componente `Brand` no cabeçalho e no rodapé do painel. O visual parte de **Papel e tinta**: fundo cinza-claro `#F5F5F7`, cartões brancos e texto grafite `#353139`. O vinho `#793947`, os fundos rosés e detalhes verdes acompanham as cores da logo. Vermelho e verde continuam identificando os candidatos. O cabeçalho usa abas em cápsula sobre fundo rosé, com a página selecionada em branco, texto vinho e sombra discreta. A troca entre as abas acontece sem recarregar o documento: o cabeçalho permanece visível enquanto o conteúdo carrega, com blocos suaves de espera e suporte aos botões voltar e avançar do navegador. As abas têm fonte de 16px; no celular, a logo fica centralizada acima da navegação. A paleta oficial fica em `src/theme/palettes.ts` e as regras compartilhadas de tema em `src/theme/theme.css`.
 
 Projeto independente, sem vínculo com a Justiça Eleitoral.
 

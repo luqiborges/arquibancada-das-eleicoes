@@ -1,5 +1,6 @@
 const legacyRoutes = new Set([
   '/arquibancadas',
+  '/previa-header',
   '/estadios',
   '/estadios-3d',
   '/estadio-3d',

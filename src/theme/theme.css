@@ -210,3 +210,52 @@
 .site-theme .info-banner p {
   color: #426573;
 }
+
+/* Navegação compartilhada em cápsula. */
+.site-theme .header nav {
+  height: auto;
+  align-self: center;
+  gap: 4px;
+  padding: 5px;
+  border: 1px solid color-mix(in srgb, var(--preview-accent) 7%, transparent);
+  border-radius: 999px;
+  background: var(--preview-soft);
+}
+.site-theme .header .nav {
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  color: var(--preview-muted);
+  font-size: 16px;
+  transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+}
+.site-theme .header .nav:hover {
+  background: color-mix(in srgb, var(--preview-surface) 50%, transparent);
+  color: var(--preview-accent);
+}
+.site-theme .header .nav.active {
+  background: var(--preview-surface);
+  color: var(--preview-accent);
+  font-weight: 650;
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--preview-accent) 8%, transparent), 0 1px 2px color-mix(in srgb, var(--preview-accent) 5%, transparent);
+}
+.site-theme .header .nav.active:after {
+  display: none;
+}
+@media(max-width:550px) {
+  .site-theme .header-inner {
+    padding-bottom: 12px;
+    row-gap: 12px;
+  }
+  .site-theme .header nav {
+    width: 100%;
+  }
+  .site-theme .header .nav {
+    padding: 0 12px;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  .site-theme .header .nav {
+    transition: none;
+  }
+}
