@@ -3,7 +3,6 @@ import { ArrowDown, ArrowUpRight, Check, ChevronDown, CircleHelp, Globe2, MapPin
 
 import SiteFooter from '../../components/SiteFooter/SiteFooter';
 import DataSourceBanner from '../../components/DataSourceBanner';
-import SiteHeader from '../../components/SiteHeader';
 import BrazilFlag from '../../components/BrazilFlag';
 import { useStateResults } from '../../hooks/useStateResults';
 import { useLiveResult } from '../../hooks/useLiveResult';
@@ -18,7 +17,7 @@ const number = (n: number) => n.toLocaleString('pt-BR');
 const percent = (n: number) => n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const tone = (c: Candidate) => c.party === 'PT' ? 'coral' : c.party === 'PL' ? 'blue' : Number(c.number) % 2 ? 'coral' : 'blue';
 
-export default function SeriousPage({ showHeader = true }: { showHeader?: boolean }) {
+export default function SeriousPage() {
   useEffect(() => {
     const previous = document.title;
     document.title = 'Papo sério • Arquibancada das Eleições';
@@ -41,7 +40,6 @@ export default function SeriousPage({ showHeader = true }: { showHeader?: boolea
   const candidates = result?.candidates ?? [];
   const difference = candidates.length > 1 ? Math.abs(candidates[0].votes - candidates[1].votes) : 0;
   return <>
-    {showHeader && <SiteHeader activePage="serious" />}
     <main className="overview-page">
       <div className="eyebrow"><BrazilFlag /> ELEIÇÕES GERAIS <span className="separator">/</span> 25 OUTUBRO 2026 <span className="turn">2º TURNO</span></div>
       <div className="toolbar">

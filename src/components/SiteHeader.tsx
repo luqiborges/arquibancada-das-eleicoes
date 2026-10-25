@@ -1,10 +1,14 @@
 import Brand from './Brand';
+import ThemeSwitch from './ThemeSwitch/ThemeSwitch';
+import type { ThemePreference } from '../theme/preference';
 
 type SiteHeaderProps = {
   activePage: 'grandstands' | 'serious';
+  themePreference: ThemePreference;
+  onThemePreferenceChange: (value: ThemePreference) => void;
 };
 
-export default function SiteHeader({ activePage }: SiteHeaderProps) {
+export default function SiteHeader({ activePage, themePreference, onThemePreferenceChange }: SiteHeaderProps) {
   return (<header className="header">
     <div className="header-inner">
       <Brand />
@@ -20,6 +24,7 @@ export default function SiteHeader({ activePage }: SiteHeaderProps) {
           aria-current={activePage === 'serious' ? 'page' : undefined}
         >Papo sério</a>
       </nav>
+      <ThemeSwitch value={themePreference} onChange={onThemePreferenceChange} />
     </div>
   </header>);
 }

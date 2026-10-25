@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import StadiumScene3D from './StadiumScene3D';
 import type { Camera3D } from '../scene/geometry';
 import { CELEBRATION_SECONDS } from '../scene/trophy';
+import type { Daylight } from '../scene/daylight';
 
 type CelebratingStadiumProps = {
   filled: number;
@@ -13,6 +14,7 @@ type CelebratingStadiumProps = {
   entranceMotion?: boolean;
   gateOpen?: boolean;
   environment?: boolean;
+  lighting: Daylight;
 };
 
 export default function CelebratingStadium({
@@ -24,6 +26,7 @@ export default function CelebratingStadium({
   entranceMotion = true,
   gateOpen = true,
   environment = false,
+  lighting,
 }: CelebratingStadiumProps) {
   const [seconds, setSeconds] = useState(0);
   useEffect(() => {
@@ -56,5 +59,6 @@ export default function CelebratingStadium({
     entranceMotion={entranceMotion}
     gateOpen={gateOpen}
     environment={environment}
+    lighting={lighting}
   />;
 }

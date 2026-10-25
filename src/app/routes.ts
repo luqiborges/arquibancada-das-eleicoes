@@ -1,4 +1,4 @@
-﻿const supportedRoutes = new Set(['/', '/papo-serio', '/cores']);
+const supportedRoutes = new Set(['/', '/papo-serio']);
 
 export function resolveRoute(
   location: Pick<Location, 'pathname' | 'search' | 'hash'> = window.location,

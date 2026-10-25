@@ -30,8 +30,9 @@ Confira no navegador os cenários afetados:
 
 - Abra `/` e `/papo-serio` em desktop e celular. Confira legibilidade, cabeçalho e rodapé alinhados e ausência de rolagem horizontal.
 - Nas arquibancadas, confira as duas arenas, rotação sincronizada, zoom inicial e restauração da câmera.
+- No seletor de aparência, confira Automático, Claro e Escuro, teclado, persistência ao recarregar e navegar, sincronização entre abas e funcionamento sem armazenamento. A iluminação dos estádios deve continuar seguindo o horário real em qualquer preferência.
 - No Papo sério, confira busca sem acentos, filtro por região, seleção nacional/estadual e área clicável inteira dos selects, incluindo a seta.
-- Se alterar tema ou CSS compartilhado, confira também `/cores` nas duas páginas e a logo no cabeçalho e no rodapé.
+- Se alterar tema ou CSS compartilhado, confira as duas páginas às 12h, 17h30, 18h e 19h com relógio controlado no navegador; verifique contraste, logo transparente no cabeçalho e no rodapé, filtros, avisos e sincronização ao retornar à aba.
 - Para alterações nos dados, confira carregamento inicial, zero votos, resultado parcial, 100%, resposta indisponível e preservação do último resultado após uma falha. O horário só deve mudar com uma resposta bem-sucedida.
 - Para alterações na cena, confira portões antes e depois do horário de abertura, parada da entrada em 100%, vitória oficial antes de 100%, remoção da indicação de eleito e preferência por movimento reduzido.
 - Para mudanças nas rotas, abra diretamente uma URL interna com parâmetros e hash. Confira também que endereços antigos e desconhecidos redirecionam para `/`, preservando parâmetros e hash.

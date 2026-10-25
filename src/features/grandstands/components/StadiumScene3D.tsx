@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { PointerEvent } from 'react';
 
 import { box, places3D, project, stadiumGeometry } from '../scene/geometry';
@@ -6,7 +6,8 @@ import type { Camera3D, Face, Vec3 } from '../scene/geometry';
 import { celebrationGeometry } from '../scene/trophy';
 import { gateGeometry, roadGeometry, walkerGeometry } from '../scene/entrance';
 import { environmentGeometry, environmentGround } from '../scene/environment';
-import { PaletteContext } from '../../../theme/palettes';
+import { blendColor, ENTRANCE_LIGHTS, floodlightCoverage, FLOODLIGHTS } from '../scene/daylight';
+import type { Daylight } from '../scene/daylight';
 
 const architecture = stadiumGeometry();
 
@@ -25,6 +26,7 @@ type StadiumScene3DProps = {
   gateOpen?: boolean;
   environment?: boolean;
   wideView?: boolean;
+  lighting: Daylight;
 };
 
 export default function StadiumScene3D({
@@ -37,8 +39,8 @@ export default function StadiumScene3D({
   gateOpen = true,
   environment = false,
   wideView = environment,
+  lighting,
 }: StadiumScene3DProps) {
-  const sceneBackground = useContext(PaletteContext)?.scene ?? '#F0EFF2';
   const canvas = useRef<HTMLCanvasElement>(null);
   const drag = useRef<{
     x: number;
@@ -81,8 +83,28 @@ export default function StadiumScene3D({
       element.width = Math.round(width * dpr);
       element.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.fillStyle = sceneBackground;
-      ctx.fillRect(0, 0, width, height);
+      const colorCache = new Map<string, string>();
+      const litColor = (color: string, position?: Vec3) => {
+        const coverage = position ? Math.round(floodlightCoverage(position) * 20) / 20 : 0;
+        const key = `${color}:${coverage}`;
+        if (!colorCache.has(key)) {
+          const lamp = coverage * lighting.lamps;
+          const ambient = blendColor(color, '#17243b', lighting.night * .5 * (1 - lamp * .97));
+          colorCache.set(key, blendColor(ambient, '#fff5d3', lamp * .035));
+        }
+        return colorCache.get(key)!;
+      };
+      {
+        const sky = ctx.createLinearGradient(0, 0, 0, height);
+        sky.addColorStop(0, lighting.top); sky.addColorStop(1, lighting.bottom);
+        ctx.fillStyle = sky; ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = `rgba(255,248,220,${lighting.night * .8})`;
+        for (let i = 0; i < 40; i++) {
+          ctx.beginPath(); ctx.arc((i * .618 % 1) * width, (i * .317 % 1) * height * .26, i % 4 === 0 ? 1.4 : .8, 0, Math.PI * 2); ctx.fill();
+        }
+        ctx.fillStyle = `rgba(255,247,210,${lighting.night})`;
+        ctx.beginPath(); ctx.arc(width * .84, height * .12, 11, 0, Math.PI * 2); ctx.fill();
+      }
       const p = (v: Vec3) => {
         const point = project(v, { ...camera, zoom: camera.zoom * (wideView ? .7 : .88) }, width, height);
         return { ...point, y: point.y - height * .08 };
@@ -93,7 +115,7 @@ export default function StadiumScene3D({
           ctx.beginPath();
           points.forEach((point, i) => i ? ctx.lineTo(point.x, point.y) : ctx.moveTo(point.x, point.y));
           ctx.closePath();
-          ctx.fillStyle = face.color;
+          ctx.fillStyle = litColor(face.color);
           ctx.fill();
         });
       // Ground shadows remain on the ground plane as the camera turns.
@@ -110,11 +132,13 @@ export default function StadiumScene3D({
       const shapes: Shape[] = [];
       const addFace = (face: Face, target: Shape[] = shapes) => {
         const points = face.points.map(p);
+        const center = face.points.reduce((sum, v) => ({ x: sum.x + v.x / face.points.length, y: sum.y + v.y / face.points.length, z: sum.z + v.z / face.points.length }), { x: 0, y: 0, z: 0 });
+        const color = litColor(face.color, center);
         const draw = () => {
           ctx.beginPath();
           points.forEach((v, i) => i ? ctx.lineTo(v.x, v.y) : ctx.moveTo(v.x, v.y));
           ctx.closePath();
-          ctx.fillStyle = face.color;
+          ctx.fillStyle = color;
           ctx.fill();
         };
         if (['#668b70', '#70977b', '#b7a8a0', '#f6e8cf'].includes(face.color))
@@ -127,6 +151,24 @@ export default function StadiumScene3D({
         environmentGeometry(green).forEach(face => addFace(face));
       gateGeometry(green, gateOpen).forEach(face => addFace(face));
       architecture.forEach(face => addFace(face));
+      {
+        for (const light of FLOODLIGHTS) {
+          box(light.x, 0, light.z, 2.2, 72, 2.2, ['#929aa8', '#677384', '#d1d8df']).forEach(face => addFace(face));
+          box(light.x, 70, light.z, 22, 7, 6, ['#e2e3d4', '#a6a99c', '#fff6d5']).forEach(face => addFace(face));
+        }
+        for (const light of ENTRANCE_LIGHTS) {
+          box(light.x, 0, light.z, 1.8, light.y, 1.8, ['#929aa8', '#677384', '#d1d8df']).forEach(face => addFace(face));
+          box(light.x, light.y - 1, light.z, 10, 3, 5, ['#e2e3d4', '#a6a99c', '#fff6d5']).forEach(face => addFace(face));
+          const centerX = light.x + (light.x > -20 ? -12 : 12);
+          const pool = Array.from({ length: 48 }, (_, i) => p({ x: centerX + 27 * Math.cos(i / 48 * Math.PI * 2), y: .7, z: light.z + 24 * Math.sin(i / 48 * Math.PI * 2) }));
+          ctx.beginPath(); pool.forEach((v, i) => i ? ctx.lineTo(v.x, v.y) : ctx.moveTo(v.x, v.y)); ctx.closePath();
+          ctx.fillStyle = `rgba(255,239,181,${lighting.lamps * .19})`; ctx.fill();
+        }
+        // Luz no gramado, antes de desenhar arquibancadas e pessoas.
+        const pool = Array.from({ length: 64 }, (_, i) => p({ x: 100 * Math.cos(i / 64 * Math.PI * 2), y: 1.05, z: 60 * Math.sin(i / 64 * Math.PI * 2) }));
+        ctx.beginPath(); pool.forEach((v, i) => i ? ctx.lineTo(v.x, v.y) : ctx.moveTo(v.x, v.y)); ctx.closePath();
+        ctx.fillStyle = `rgba(245,244,185,${lighting.lamps * .16})`; ctx.fill();
+      }
       const clothing = green ? ['#15803d', '#0b5b2b', '#36b569'] : ['#dc2626', '#a61920', '#f85b55'];
       places3D.forEach((position, i) => {
         const occupied = i < filled;
@@ -145,8 +187,8 @@ export default function StadiumScene3D({
           draw: () => {
             const radius = 2.15 * head.scale;
             const gradient = ctx.createRadialGradient(head.x - radius * .3, head.y - radius * .4, radius * .1, head.x, head.y, radius);
-            gradient.addColorStop(0, skin);
-            gradient.addColorStop(1, ['#b7805b', '#865438', '#5d3d2e', '#bd9475'][i % 4]);
+            gradient.addColorStop(0, litColor(skin, position));
+            gradient.addColorStop(1, litColor(['#b7805b', '#865438', '#5d3d2e', '#bd9475'][i % 4], position));
             ctx.beginPath();
             ctx.arc(head.x, head.y, radius, 0, Math.PI * 2);
             ctx.fillStyle = gradient;
@@ -209,6 +251,16 @@ export default function StadiumScene3D({
           else
             walkers[b++].draw();
         }
+        if (lighting.lamps > 0) {
+          for (const source of [...FLOODLIGHTS, ...ENTRANCE_LIGHTS, { x: -214, y: 34, z: -129 }, { x: 223, y: 34, z: -105 }]) {
+            const light = p(source), radius = (source.y > 40 ? 29 : 16) * light.scale;
+            const glow = ctx.createRadialGradient(light.x, light.y, 0, light.x, light.y, radius);
+            glow.addColorStop(0, `rgba(255,250,211,${lighting.lamps * .95})`);
+            glow.addColorStop(.22, `rgba(255,236,157,${lighting.lamps * .5})`);
+            glow.addColorStop(1, 'rgba(255,236,157,0)');
+            ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(light.x, light.y, radius, 0, Math.PI * 2); ctx.fill();
+          }
+        }
       };
       draw();
       if (moving) {
@@ -238,7 +290,7 @@ export default function StadiumScene3D({
     gateOpen,
     environment,
     wideView,
-    sceneBackground
+    lighting
   ]);
   const move = (event: PointerEvent<HTMLCanvasElement>) => {
     if (!drag.current || drag.current.pointer !== event.pointerId)

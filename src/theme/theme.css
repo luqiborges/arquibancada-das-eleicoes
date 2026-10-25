@@ -1,121 +1,121 @@
 .site-theme {
-  --rose: var(--preview-accent);
-  --cream: var(--preview-background);
-  --plum: var(--preview-muted);
+  --rose: var(--theme-accent);
+  --cream: var(--theme-background);
+  --plum: var(--theme-muted);
   min-height: 100vh;
-  background: var(--preview-background);
-  color: var(--preview-text);
+  background: var(--theme-background);
+  color: var(--theme-text);
   color-scheme: light;
 }
 .site-theme .header,.site-theme .result-panel,.site-theme .stadium-card,.site-theme .stats article,.site-theme .state-card,.site-theme .search,.site-theme .region,.site-theme .camera3d button {
-  background: var(--preview-surface);
-  border-color: var(--preview-border);
+  background: var(--theme-surface);
+  border-color: var(--theme-border);
 }
 .site-theme .header {
-  border-bottom-color: var(--preview-border);
+  border-bottom-color: var(--theme-border);
 }
 .site-theme .brand,.site-theme h1,.site-theme h2,.site-theme h3,.site-theme .stats strong,.site-theme .vote-count strong,.site-theme .location-select,.site-theme .search input {
-  color: var(--preview-text);
+  color: var(--theme-text);
 }
 .site-theme .brand-icon {
-  background: var(--preview-accent);
-  color: var(--preview-accentInk);
+  background: var(--theme-accent);
+  color: var(--theme-accentInk);
 }
 .site-theme .nav,.site-theme .tse-link,.site-theme .eyebrow,.site-theme .last-check,.site-theme .office span:not(.office-icon),.site-theme .counting span,.site-theme .candidate-label,.site-theme .candidate-identity p,.site-theme .vote-count,.site-theme .stats article>span,.site-theme .stats small,.site-theme .section-heading p,.site-theme .search,.site-theme .search input::placeholder,.site-theme .region,.site-theme .state-filters>span,.site-theme .state-result,.site-theme .state-bottom,.site-theme .state-bottom strong,.site-theme footer>span,.site-theme .stadium-votes>span,.site-theme .stadium-occupancy,.site-theme .seat-remainder,.site-theme .camera3d,.site-theme .stadium-live-info,.site-theme .stadium-waiting small {
-  color: var(--preview-muted);
+  color: var(--theme-muted);
 }
 .site-theme .muted {
-  color: var(--preview-muted)!important;
+  color: var(--theme-muted)!important;
 }
 .site-theme .nav.active,.site-theme .nav:hover,.site-theme .result-note button,.site-theme .section-kicker,.site-theme .info-banner,.site-theme .info-banner strong,.site-theme .info-banner>a,.site-theme .stadium-scale,.site-theme .stadium-scale>div,.site-theme .stadium-scale a,.site-theme .stadiums-page footer>a,.site-theme .camera3d button:hover,.site-theme .stadium-waiting,.site-theme .globe {
-  color: var(--preview-accent);
+  color: var(--theme-accent);
 }
 .site-theme .nav.active:after,.site-theme .progress-track>div,.site-theme .state-progress>div,.site-theme .status i,.site-theme .auto-status i,.site-theme .note-dot {
-  background: var(--preview-accent);
+  background: var(--theme-accent);
 }
 .site-theme .edition,.site-theme .turn,.site-theme .office-icon,.site-theme .status,.site-theme .uf,.site-theme .badge3d,.site-theme .leading,.site-theme .elected {
-  background: var(--preview-soft);
-  color: var(--preview-accent);
-  border-color: var(--preview-border);
+  background: var(--theme-soft);
+  color: var(--theme-accent);
+  border-color: var(--theme-border);
 }
 .site-theme .progress-track,.site-theme .state-progress,.site-theme .stadium-meter {
-  background: var(--preview-soft);
+  background: var(--theme-soft);
 }
 .site-theme .toolbar,.site-theme footer,.site-theme .result-note {
-  border-color: var(--preview-border);
+  border-color: var(--theme-border);
 }
 .site-theme .result-note {
-  color: var(--preview-muted);
+  color: var(--theme-muted);
 }
 .site-theme .info-banner,.site-theme .help,.site-theme .empty-candidates,.site-theme .stadium-scale,.site-theme .stadium-waiting {
-  background: var(--preview-soft);
-  border-color: var(--preview-border);
+  background: var(--theme-soft);
+  border-color: var(--theme-border);
 }
 .site-theme .info-banner p,.site-theme .help,.site-theme .empty-candidates,.site-theme .no-results {
-  color: var(--preview-muted);
+  color: var(--theme-muted);
 }
 .site-theme .empty-candidates h3 {
-  color: var(--preview-text);
+  color: var(--theme-text);
 }
 .site-theme .candidate {
-  --accent: var(--preview-red);
-  --border: var(--preview-border);
-  --bg: var(--preview-redSurface);
-  --track: var(--preview-soft);
+  --accent: var(--theme-red);
+  --border: var(--theme-border);
+  --bg: var(--theme-redSurface);
+  --track: var(--theme-soft);
 }
 .site-theme .candidate.blue {
-  --accent: var(--preview-green);
-  --border: var(--preview-border);
-  --bg: var(--preview-greenSurface);
-  --track: var(--preview-soft);
+  --accent: var(--theme-green);
+  --border: var(--theme-border);
+  --bg: var(--theme-greenSurface);
+  --track: var(--theme-soft);
 }
 .site-theme .stadium-card {
-  --crowd: var(--preview-red);
+  --crowd: var(--theme-red);
 }
 .site-theme .stadium-22 {
-  --crowd: var(--preview-green);
+  --crowd: var(--theme-green);
 }
 .site-theme .leader-dot {
-  background: var(--preview-red);
+  background: var(--theme-red);
 }
 .site-theme .leader-dot.blue {
-  background: var(--preview-green);
+  background: var(--theme-green);
 }
 .site-theme .state-card.selected {
-  border-color: var(--preview-accent);
-  box-shadow: 0 0 0 1px var(--preview-accent);
+  border-color: var(--theme-accent);
+  box-shadow: 0 0 0 1px var(--theme-accent);
 }
 .site-theme .state-card:hover {
-  border-color: var(--preview-accent);
+  border-color: var(--theme-accent);
 }
 .site-theme .camera3d input {
-  accent-color: var(--preview-accent);
+  accent-color: var(--theme-accent);
 }
 .site-theme .scene3d-wrap {
-  background: var(--preview-scene);
+  background: var(--theme-background);
 }
 .site-theme .error {
-  background: var(--preview-soft);
-  border-color: var(--preview-border);
-  color: var(--preview-text);
+  background: var(--theme-soft);
+  border-color: var(--theme-border);
+  color: var(--theme-text);
 }
 .site-theme .victory3d {
-  background: var(--preview-soft);
-  border-color: var(--preview-accent);
-  color: var(--preview-accent);
+  background: var(--theme-soft);
+  border-color: var(--theme-accent);
+  color: var(--theme-accent);
 }
 .site-theme .trophy-selected {
-  border-color: var(--preview-accent);
+  border-color: var(--theme-accent);
 }
 .site-theme :focus-visible {
-  outline: 2px solid var(--preview-accent);
+  outline: 2px solid var(--theme-accent);
   outline-offset: 3px;
 }
 .site-theme .state-result strong {
-  color: var(--preview-text);
+  color: var(--theme-text);
 }
 .site-theme .stadium-scale p {
-  color: var(--preview-muted);
+  color: var(--theme-muted);
 }
 .brand {
   letter-spacing: normal;
@@ -133,14 +133,14 @@
   border: 0;
 }
 .site-theme .search:focus-within {
-  border-color: var(--preview-accent);
+  border-color: var(--theme-accent);
   box-shadow: 0 0 0 3px #79394718;
 }
 .site-theme .candidate-bar>div {
   background: var(--accent);
 }
 .site-theme .stadium-scale p {
-  color: var(--preview-muted);
+  color: var(--theme-muted);
 }
 @media(max-width:550px) {
   .header .brand-logo {
@@ -154,7 +154,7 @@
   color: #748365;
 }
 .site-theme .search:focus-within {
-  box-shadow: 0 0 0 3px color-mix(in srgb,var(--preview-accent) 12%,transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb,var(--theme-accent) 12%,transparent);
 }
 .site-theme .stadium-waiting {
   background: #EDE7FA;
@@ -163,14 +163,6 @@
 }
 .site-theme .stadium-waiting p {
   color: #6B6078;
-}
-.theme-preview[data-palette=noite] .stadium-waiting {
-  background: #3B321F;
-  border-color: #776137;
-  color: #F3D58A;
-}
-.theme-preview[data-palette=noite] .stadium-waiting p {
-  color: #F3D58A;
 }
 .site-theme .stadium-waiting {
   align-items: center;
@@ -217,27 +209,27 @@
   align-self: center;
   gap: 4px;
   padding: 5px;
-  border: 1px solid color-mix(in srgb, var(--preview-accent) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--theme-accent) 7%, transparent);
   border-radius: 999px;
-  background: var(--preview-soft);
+  background: var(--theme-soft);
 }
 .site-theme .header .nav {
   min-height: 44px;
   padding: 0 20px;
   border-radius: 999px;
-  color: var(--preview-muted);
+  color: var(--theme-muted);
   font-size: 16px;
-  transition: background-color 160ms ease, color 160ms ease, box-shadow 160ms ease;
+  transition: box-shadow 160ms ease;
 }
 .site-theme .header .nav:hover {
-  background: color-mix(in srgb, var(--preview-surface) 50%, transparent);
-  color: var(--preview-accent);
+  background: color-mix(in srgb, var(--theme-surface) 50%, transparent);
+  color: var(--theme-accent);
 }
 .site-theme .header .nav.active {
-  background: var(--preview-surface);
-  color: var(--preview-accent);
+  background: var(--theme-surface);
+  color: var(--theme-accent);
   font-weight: 650;
-  box-shadow: 0 2px 6px color-mix(in srgb, var(--preview-accent) 8%, transparent), 0 1px 2px color-mix(in srgb, var(--preview-accent) 5%, transparent);
+  box-shadow: 0 2px 6px color-mix(in srgb, var(--theme-accent) 8%, transparent), 0 1px 2px color-mix(in srgb, var(--theme-accent) 5%, transparent);
 }
 .site-theme .header .nav.active:after {
   display: none;
@@ -259,3 +251,19 @@
     transition: none;
   }
 }
+
+/* Cores que antes eram fixas também acompanham o horário nas duas páginas. */
+.site-theme .state-title strong { color: var(--theme-text); }
+.site-theme .state-title svg,.site-theme .source-badge,.site-theme .source-badge small { color: var(--theme-muted); }
+.site-theme .region select option,.site-theme .location-select select option { background: var(--theme-surface); color: var(--theme-text); }
+.site-theme .party>span { opacity: 1; }
+.site-theme .separator { color: var(--theme-muted); }
+.site-theme .avatar { background: var(--theme-surface); color: var(--theme-text); border-color: var(--theme-surface); }
+.site-theme[data-scheme=dark] .info-banner,
+.site-theme[data-scheme=dark] .stadium-waiting { background: var(--theme-soft); border-color: var(--theme-border); color: var(--theme-accent); }
+.site-theme[data-scheme=dark] .info-banner strong,
+.site-theme[data-scheme=dark] .info-banner>a,
+.site-theme[data-scheme=dark] .info-banner>svg { color: var(--theme-accent); }
+.site-theme[data-scheme=dark] .info-banner p,
+.site-theme[data-scheme=dark] .stadium-waiting p { color: var(--theme-muted); }
+.site-theme[data-scheme=dark] .section-heading .globe { color: var(--theme-muted); }

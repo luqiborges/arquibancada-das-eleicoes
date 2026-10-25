@@ -6,15 +6,28 @@ O mapa de pastas e os comportamentos do produto estão no [README](../README.md)
 
 `src/main.tsx` monta o React e carrega os estilos globais e o tema. `src/app/App.tsx` aplica a paleta oficial e carrega as páginas sob demanda com `lazy` e `Suspense`.
 
-O roteamento é feito pelo pathname, sem biblioteca de rotas. `src/app/routes.ts` normaliza a barra final e aceita somente as rotas da tabela abaixo; endereços antigos ou desconhecidos redirecionam para `/` com `replaceState`, preservando parâmetros e hash, sem lista de aliases. Nas páginas oficiais, `App` mantém `SiteHeader` fora do `Suspense` e intercepta cliques simples nos links do cabeçalho para navegar com `pushState` e estado React, sem recarregar o documento. O evento `popstate` sincroniza voltar e avançar. Cliques modificados mantêm o comportamento nativo dos links. `PageLoading` mostra blocos decorativos e um status acessível enquanto o módulo da página carrega; movimento reduzido desativa a pulsação. As páginas recebem `showHeader={false}` na composição oficial e mantêm seu cabeçalho próprio na prévia de cores. O retorno à raiz monta as arquibancadas e seleciona sua aba no cabeçalho.
+O roteamento é feito pelo pathname, sem biblioteca de rotas. `src/app/routes.ts` normaliza a barra final e aceita somente as rotas da tabela abaixo; endereços antigos ou desconhecidos redirecionam para `/` com `replaceState`, preservando parâmetros e hash, sem lista de aliases. Nas páginas oficiais, `App` mantém `SiteHeader` fora do `Suspense` e intercepta cliques simples nos links do cabeçalho para navegar com `pushState` e estado React, sem recarregar o documento. O evento `popstate` sincroniza voltar e avançar. Cliques modificados mantêm o comportamento nativo dos links. `PageLoading` mostra blocos decorativos e um status acessível enquanto o módulo da página carrega; movimento reduzido desativa a pulsação. O cabeçalho é montado somente por `App`, sem cabeçalhos alternativos nas páginas. O retorno à raiz monta as arquibancadas e seleciona sua aba no cabeçalho.
 
 | Endereço | Página | Responsabilidade |
 | --- | --- | --- |
 | `/` | `GrandstandsPage` | Resultado nacional representado pelas arenas e controles compartilhados de câmera |
 | `/papo-serio` | `SeriousPage` | Placar nacional ou estadual, resumo de votos e filtros de UFs |
-| `/cores` | `ColorPreviewPage` | Prévia de paleta e de página, persistida nos parâmetros da URL |
 
 A hospedagem precisa responder com `index.html` também nas rotas internas.
+
+## Tema e iluminação
+
+`useLocalDaylight` é montado por `App` e mantém um único relógio: usa horas, minutos e segundos locais, atualiza a cada dez segundos com a aba visível e sincroniza ao retornar. `theme/timeOfDay.ts` define paletas coordenadas: em Automático, o modo noturno começa às 18h e termina às 6h15. Fundos variam dentro de cada paleta; textos e superfícies trocam juntos para preservar contraste. `theme/palettes.ts` separa a paleta de `color-scheme` e converte somente as cores em variáveis CSS `--theme-*`, aplicadas no contêiner de `App`. Não há contexto de paletas ou cores de prévias antigas.
+
+A paleta escura usa midnight com base grafite e azul profundo discreto. Cabeçalho, cartões, filtros, avisos e rodapé acompanham o tema nas duas páginas. O documento recebe a mesma cor de fundo, `color-scheme` e metadado `theme-color` para manter rolagem, controles nativos e barra do navegador coerentes. A logo mantém sua transparência original, sem fundo adicional.
+
+`useThemePreference` lê a escolha antes da primeira renderização, persiste em `localStorage` (`arquibancada.theme`) e acompanha `storage` para sincronizar abas. Falhas de armazenamento preservam a escolha em memória. `theme/preference.ts` valida o valor e resolve o horário usado apenas pela paleta: Claro usa meio-dia, Escuro usa 19h e Automático usa o relógio atual. A iluminação real é memoizada separadamente: escolher outro tema não modifica o céu nem reinicia a caminhada.
+
+`ThemeSwitch` apresenta rádios nativos no desktop. Até 650px, mostra um `select` nativo sobre `SunMoon` (Automático), `Sun` (Claro) ou `Moon` (Escuro), da Lucide. Só o controle visível participa da navegação por teclado. No celular, logo e ícone ficam na primeira linha e abas na segunda; o seletor nativo gerencia abertura e seleção sem menu customizado.
+
+`App` passa `lighting` por `GrandstandsPage` e `CelebratingStadium` até `StadiumScene3D`. A iluminação é obrigatória na cena; não há caminho de renderização exclusivo de prévias. `scene/daylight.ts` calcula céu e intensidades em um ciclo diário contínuo: amanhecer estilizado entre 5h30 e 7h e anoitecer entre 17h e 19h. `floodlightCoverage` define a cobertura da arena e da entrada em coordenadas do mundo; `ENTRANCE_LIGHTS` posiciona três postes ao longo da rua. Torcida, assentos, gramado e pedestres permanecem iluminados à noite, enquanto o entorno escurece.
+
+O relógio visual não altera portões, votos ou consultas. Mudanças de luz ou tema não reiniciam a comemoração, cujo efeito depende somente de `celebrate`. Não há simulação ou páginas de prévia.
 
 ## Fluxo dos dados
 
@@ -57,12 +70,12 @@ As duas arenas representam os candidatos cadastrados em `FIRST_ROUND`. Antes dos
 
 `SiteHeader`, `SiteFooter`, `Brand`, `BrazilFlag`, `LastChecked`, `CandidateAvatar` e `DataSourceBanner` são compartilhados pelas páginas. Prefira alterar esses componentes a duplicar cabeçalho, rodapé ou avisos.
 
-Os estilos comuns ficam em `src/styles/global.css`, os de cada página junto dela e os da cena em `features/grandstands/styles`. As abas em cápsula do cabeçalho são compartilhadas e estilizadas em `src/theme/theme.css`, com cores das variáveis da paleta e navegação abaixo da logo no mobile. A paleta e o contexto ficam em `src/theme/palettes.ts`; `theme.css` aplica as variáveis ao site. `ColorPreviewPage` fornece um contexto e variáveis próprios para a prévia, sem salvar uma preferência global.
+Os estilos comuns ficam em `src/styles/global.css`, os de cada página junto dela e os da cena em `features/grandstands/styles`. As abas em cápsula do cabeçalho são compartilhadas e estilizadas em `src/theme/theme.css`, com cores das variáveis da paleta e navegação abaixo da logo no mobile. A paleta e o contexto ficam em `src/theme/palettes.ts`; `theme.css` aplica as variáveis ao site.
 
-O CSS é global e ainda contém regras e sobrescritas acumuladas durante os ajustes visuais. A ordem dos imports e a especificidade importam: teste as duas páginas e a prévia ao alterar seletores compartilhados. Preserve os 14px dos textos de apoio, o alinhamento do cabeçalho com o conteúdo e o comportamento mobile do horário de atualização.
+O CSS é global e ainda contém regras e sobrescritas acumuladas durante os ajustes visuais. A ordem dos imports e a especificidade importam: teste as duas páginas de dia e à noite ao alterar seletores compartilhados. Preserve os 14px dos textos de apoio, o alinhamento do cabeçalho com o conteúdo e o comportamento mobile do horário de atualização.
 
 ## Limites atuais
 
 O app é inteiramente frontend: não há backend, banco de dados, autenticação, proxy ou armazenamento persistente de resultados. O acesso depende da disponibilidade e das permissões CORS dos arquivos públicos do TSE. Um horário recente na interface informa uma consulta bem-sucedida; não significa que o arquivo recebido tenha acabado de ser publicado.
 
-Os testes automatizados cobrem parsing, regras eleitorais, ocupação e geometria. A validação visual e de interação continua manual; não há suíte de navegador instalada neste repositório. Veja os cenários no [guia de contribuição](../CONTRIBUTING.md).
+Os testes automatizados cobrem parsing, regras eleitorais, ocupação, geometria, iluminação, contraste e resolução da preferência de tema. A validação visual e de interação continua manual; não há suíte de navegador instalada neste repositório. Veja os cenários no [guia de contribuição](../CONTRIBUTING.md).

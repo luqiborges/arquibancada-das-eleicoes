@@ -3,11 +3,11 @@ import { Box, Clock3, RotateCcw, Trophy } from 'lucide-react';
 
 import SiteFooter from '../../components/SiteFooter/SiteFooter';
 import DataSourceBanner from '../../components/DataSourceBanner';
-import SiteHeader from '../../components/SiteHeader';
 import BrazilFlag from '../../components/BrazilFlag';
 import CandidateAvatar from '../../components/CandidateAvatar';
 import CelebratingStadium from '../../features/grandstands/components/CelebratingStadium';
 import { useLiveResult } from '../../hooks/useLiveResult';
+import type { Daylight } from '../../features/grandstands/scene/daylight';
 import LastChecked from '../../components/LastChecked';
 import { officialWinner } from '../../domain/election/winner';
 import type { Candidate } from '../../domain/election/types';
@@ -23,7 +23,7 @@ const fmt = (n: number) => n.toLocaleString('pt-BR');
 // 75% of the camera slider range (0.7 to 1.3).
 const initialCamera = { ...DEFAULT_CAMERA, zoom: 1.15 };
 
-export default function GrandstandsPage({ showHeader = true }: { showHeader?: boolean }) {
+export default function GrandstandsPage({ lighting }: { lighting: Daylight }) {
   const [camera, setCamera] = useState(initialCamera);
   const [scheduledOpen, setScheduledOpen] = useState(() => isEntranceOpen(Date.now()));
   const { result, error, checked } = useLiveResult(true);
@@ -51,7 +51,6 @@ export default function GrandstandsPage({ showHeader = true }: { showHeader?: bo
     };
   }, [scheduledOpen]);
   return <>
-    {showHeader && <SiteHeader activePage="grandstands" />}
     <main className="stadiums-page page3d">
       <div className="stadium-live-row">
         <div className="stadium-live-info" role="status">
@@ -119,6 +118,7 @@ export default function GrandstandsPage({ showHeader = true }: { showHeader?: bo
               entranceMotion={entranceMotion}
               gateOpen={gateOpen}
               environment
+              lighting={lighting}
             />
             <div className="stadium-occupancy">
               <span><i />{known ? fmt(count.filled) : '—'} pessoinhas na arquibancada</span>

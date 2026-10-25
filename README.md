@@ -31,7 +31,7 @@ src/
   domain/election/        # Tipos e regras de eleição, sem dependência de React
   features/grandstands/   # Componentes, geometria e estilos da animação 3D
   hooks/                  # Consultas e estado reutilizável de React
-  pages/                  # Arquibancadas, Papo sério e prévia de cores
+  pages/                  # Arquibancadas e Papo sério
   services/               # Integração, validação e normalização dos dados do TSE
   styles/                 # Estilos globais e layout compartilhado
   theme/                  # Paletas, contexto de cores e regras do tema
@@ -79,7 +79,9 @@ A comemoração com troféu e confetes depende de exatamente um candidato com o 
 
 O entorno tem árvores, canteiros, bandeirinhas, bancos, postes e quiosque. A câmera e o zoom são compartilhados entre as duas arenas. A cena usa geometria tridimensional projetada em Canvas, sem modelos externos. A preferência por movimento reduzido mantém a caminhada estática e mostra diretamente a pose final da comemoração. A aba oculta suspende o avanço das animações.
 
-Os modos de simulação e as páginas de teste foram removidos. Os aliases e os endereços antigos de teste não estão disponíveis. Os testes automatizados de leitura dos dados e geometria permanecem disponíveis por `npm test`.
+A interface tem somente as duas páginas oficiais, sem simulação eleitoral. Os testes automatizados de dados, regras, geometria, iluminação e tema estão disponíveis por `npm test`.
+
+Na página principal, os estádios acompanham o horário local do dispositivo: o céu escurece entre 17h e 19h e clareia entre 5h30 e 7h. Refletores iluminam gramado, arquibancadas e torcida; três postes clareiam o caminho das pessoas até o portão. São horários estilizados, sem geolocalização ou cálculo astronômico. A iluminação é conferida a cada dez segundos com a aba visível e sincronizada ao retornar à aba. Ela é independente do horário de abertura dos portões, que continua usando Brasília, e não altera os votos ou a comemoração oficial. Não há páginas de simulação ou prévias de paletas; endereços antigos redirecionam para a raiz com parâmetros e hash preservados.
 
 ## Hospedagem e visual
 
@@ -87,10 +89,20 @@ Configure a hospedagem para servir `index.html` nas rotas da aplicação; o Vite
 
 A identidade oficial usa a logo fornecida em `src/assets/brand/logo-arquibancada.png`, exibida pelo componente `Brand` no cabeçalho e no rodapé do painel. O visual parte de **Papel e tinta**: fundo cinza-claro `#F5F5F7`, cartões brancos e texto grafite `#353139`. O vinho `#793947`, os fundos rosés e detalhes verdes acompanham as cores da logo. Vermelho e verde continuam identificando os candidatos. O cabeçalho usa abas em cápsula sobre fundo rosé, com a página selecionada em branco, texto vinho e sombra discreta. A troca entre as abas acontece sem recarregar o documento: o cabeçalho permanece visível enquanto o conteúdo carrega, com blocos suaves de espera e suporte aos botões voltar e avançar do navegador. As abas têm fonte de 16px; no celular, a logo fica centralizada acima da navegação. A paleta oficial fica em `src/theme/palettes.ts` e as regras compartilhadas de tema em `src/theme/theme.css`.
 
+No modo Automático, Arquibancadas e Papo sério compartilham o tema por horário local: fundo claro com tons quentes até 18h, troca coordenada de textos, cartões e controles para o modo noturno às 18h e retorno ao claro às 6h15. A paleta noturna escurece até 19h. A logo mantém sua transparência original, sem caixa branca. Nenhum seletor de horário é exibido na interface; o tema acompanha o relógio e é sincronizado ao retornar à aba. O tema e a iluminação da cena usam um único relógio compartilhado, sem alterar o intervalo das consultas eleitorais.
+
 Projeto independente, sem vínculo com a Justiça Eleitoral.
 
-## Prévia de paletas
+### Preferência de aparência
 
-Abra `/cores` para experimentar **Noite de jogo**, **Papel e tinta** e **Céu de domingo**. O seletor permite ver as paletas nas arquibancadas e no painel **Papo sério**, inclusive navegando pelos links do cabeçalho dentro da prévia. Fundo, cartões, textos, destaques e o fundo do Canvas acompanham a seleção; os candidatos continuam identificados por vermelho e verde.
+O modo escuro usa midnight com base grafite e um toque de azul profundo: fundo `#171C26`, cartões `#242C38` e textos claros, com destaques rosés e identificação vermelha/verde das torcidas. O céu dos estádios mantém seus tons próprios de noite.
 
-A seleção fica no endereço, por exemplo `/cores?paleta=noite&pagina=papo-serio`, para recarregar ou compartilhar. **Sair da prévia** volta à página inicial com o visual oficial baseado na logo. A prévia usa as mesmas consultas dos dados reais e não altera as cores das páginas oficiais nem grava preferência permanente.
+O cabeçalho oferece **Automático**, **Claro** e **Escuro** nas duas páginas. Automático é o padrão e acompanha o horário local; Claro e Escuro mantêm a paleta escolhida. A preferência é salva em `localStorage` na chave `arquibancada.theme`, vale nas duas páginas e é sincronizada entre abas. Se o navegador bloquear o armazenamento, a escolha continua funcionando na aba atual. Uma preferência ausente ou inválida volta ao automático.
+
+Esse controle muda apenas o tema da interface: céu, refletores e postes dos estádios continuam acompanhando o horário real, inclusive com a página fixada no modo claro. Não há simulação de horário ou alteração de votos. As opções são acessíveis por teclado, com Tab para entrar no grupo e setas para trocar a seleção.
+
+No celular, a aparência fica em um botão de ícone ao lado da logo, sem uma linha extra no cabeçalho. O ícone combinado de sol e lua indica Automático; os ícones individuais indicam Claro e Escuro. Tocar abre o seletor nativo com as três opções. No desktop, as opções continuam visíveis lado a lado.
+
+## Publicação
+
+Em um checkout com as alterações salvas, use `npm ci`, `npm run typecheck`, `npm test` e `npm run build`. O resultado para publicar é a pasta `dist/`; `npm run preview` permite conferir esse build localmente. A hospedagem deve servir `index.html` também para `/papo-serio` e URLs desconhecidas, permitindo que o app resolva os redirecionamentos. Não publique `src/`, testes, `node_modules/` ou `artifacts/` como arquivos do site.

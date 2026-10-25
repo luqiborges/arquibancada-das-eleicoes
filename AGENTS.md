@@ -15,9 +15,11 @@ O projeto se chama **Arquibancada das Eleições**; o pacote npm é `arquibancad
 - Resultados ausentes não são resultados zerados. Não use os votos históricos de `FIRST_ROUND` como votos ao vivo.
 - A consulta automática usa o intervalo compartilhado de 5 segundos. Não reintroduza controles de pausa, atualização manual ou simulações na interface sem uma solicitação para isso.
 - A entrada de pessoas é decorativa e para em 100% das seções. Preserve os portões, a escala fixa de votos e a preferência por movimento reduzido.
-- A identidade oficial parte de Papel e tinta e da logo fornecida. Lula usa vermelho e Flávio usa verde. A rota `/cores` é uma prévia isolada, com dados reais.
+- A identidade oficial parte de Papel e tinta e da logo fornecida. Lula usa vermelho e Flávio usa verde. O tema das duas páginas acompanha o horário local, com troca para o modo noturno às 18h e retorno ao claro às 6h15. Não mantenha páginas de prévia ou controles de simulação na interface.
 
 ## Ao alterar código
+
+O seletor de aparência oferece Automático, Claro e Escuro, com preferência salva no navegador e compartilhada entre as duas páginas. Ele altera somente o tema da interface; céu e iluminação dos estádios continuam seguindo o horário real.
 
 Mantenha regras puras em `domain`, consultas em `services` e `hooks`, componentes compartilhados em `components` e a cena 3D em `features/grandstands`. Evite dependências novas quando o código existente resolver a tarefa. Não edite o build em `dist/` nem versione caches e capturas de tela.
 
