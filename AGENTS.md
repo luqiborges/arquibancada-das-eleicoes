@@ -10,7 +10,7 @@ O projeto se chama **Arquibancada das Eleições**; o pacote npm é `arquibancad
 
 ## Preserve as decisões do produto
 
-- `/` é a página oficial das arquibancadas 3D; `/papo-serio` apresenta os resultados numéricos. Mantenha os aliases antigos definidos em `src/app/routes.ts` funcionando.
+- `/` é a página oficial das arquibancadas 3D; `/papo-serio` apresenta os resultados numéricos. Não mantenha aliases individuais: endereços antigos ou desconhecidos redirecionam para `/`, preservando parâmetros e hash.
 - A comemoração depende do indicador oficial de eleito do TSE. Liderança e percentual de apuração não autorizam inferir um vencedor.
 - Resultados ausentes não são resultados zerados. Não use os votos históricos de `FIRST_ROUND` como votos ao vivo.
 - A consulta automática usa o intervalo compartilhado de 5 segundos. Não reintroduza controles de pausa, atualização manual ou simulações na interface sem uma solicitação para isso.

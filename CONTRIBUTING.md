@@ -34,7 +34,7 @@ Confira no navegador os cenários afetados:
 - Se alterar tema ou CSS compartilhado, confira também `/cores` nas duas páginas e a logo no cabeçalho e no rodapé.
 - Para alterações nos dados, confira carregamento inicial, zero votos, resultado parcial, 100%, resposta indisponível e preservação do último resultado após uma falha. O horário só deve mudar com uma resposta bem-sucedida.
 - Para alterações na cena, confira portões antes e depois do horário de abertura, parada da entrada em 100%, vitória oficial antes de 100%, remoção da indicação de eleito e preferência por movimento reduzido.
-- Para mudanças nas rotas, abra diretamente uma URL interna e um alias antigo, preservando parâmetros e hash.
+- Para mudanças nas rotas, abra diretamente uma URL interna com parâmetros e hash. Confira também que endereços antigos e desconhecidos redirecionam para `/`, preservando parâmetros e hash.
 
 Use dados controlados em testes ou interceptação local de rede para cenários difíceis de reproduzir. Não adicione votos de teste ou controles de simulação à interface pública. Registre quais verificações foram automatizadas e quais foram manuais.
 

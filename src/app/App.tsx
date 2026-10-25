@@ -1,4 +1,4 @@
-﻿import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import type { MouseEvent } from 'react';
 
 import SiteHeader from '../components/SiteHeader';
@@ -11,7 +11,7 @@ const SeriousPage = lazy(() => import('../pages/SeriousPage/SeriousPage'));
 const ColorPreviewPage = lazy(() => import('../pages/ColorPreviewPage/ColorPreviewPage'));
 
 export default function App() {
-  const [route, setRoute] = useState(resolveRoute);
+  const [route, setRoute] = useState(() => resolveRoute());
   useEffect(() => {
     const onPopState = () => setRoute(resolveRoute());
     window.addEventListener('popstate', onPopState);

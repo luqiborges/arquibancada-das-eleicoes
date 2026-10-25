@@ -1,19 +1,11 @@
-const legacyRoutes = new Set([
-  '/arquibancadas',
-  '/previa-header',
-  '/estadios',
-  '/estadios-3d',
-  '/estadio-3d',
-  '/estadios/entorno',
-  '/estadios/trofeu',
-  '/estadios-3d/trofeu',
-]);
+﻿const supportedRoutes = new Set(['/', '/papo-serio', '/cores']);
 
-export function resolveRoute() {
-  const route = window.location.pathname.replace(/\/$/, '') || '/';
-  if (legacyRoutes.has(route)) {
-    window.history.replaceState(null, '', `/${window.location.search}${window.location.hash}`);
-    return '/';
-  }
-  return route;
+export function resolveRoute(
+  location: Pick<Location, 'pathname' | 'search' | 'hash'> = window.location,
+  history: Pick<History, 'replaceState'> = window.history,
+) {
+  const route = location.pathname.replace(/\/$/, '') || '/';
+  if (supportedRoutes.has(route)) return route;
+  history.replaceState(null, '', `/${location.search}${location.hash}`);
+  return '/';
 }

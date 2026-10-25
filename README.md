@@ -69,7 +69,7 @@ Os candidatos, partidos, votos, fotos e a indicação de eleito vêm do TSE. Nen
 
 ## Arquibancadas
 
-A tela inicial `/` é a página oficial das arquibancadas em 3D. A aba **Papo sério**, em `/papo-serio`, contém o placar, os filtros e os resultados dos estados. Os links anteriores `/arquibancadas`, `/estadios`, `/estadios-3d` e `/estadio-3d` redirecionam para a página inicial. Há 800 assentos por candidato, cada um representando 100 mil votos: capacidade visual de 80 milhões. O total exato, os votos restantes para o próximo assento e eventuais votos além da capacidade continuam visíveis.
+A tela inicial `/` é a página oficial das arquibancadas em 3D. A aba **Papo sério**, em `/papo-serio`, contém o placar, os filtros e os resultados dos estados. Endereços antigos ou desconhecidos redirecionam para `/`, preservando parâmetros e hash, sem aliases individuais. Há 800 assentos por candidato, cada um representando 100 mil votos: capacidade visual de 80 milhões. O total exato, os votos restantes para o próximo assento e eventuais votos além da capacidade continuam visíveis.
 
 A escala inclui mais de 40% de folga sobre a maior votação do [boletim do primeiro turno do TSE com 99,99% totalizado](https://www.tse.jus.br/comunicacao/noticias/2026/Outubro/flavio-bolsonaro-e-lula-vao-disputar-o-2o-turno-para-a-presidencia-da-republica). Esse recorte histórico serve somente como referência da escala.
 
@@ -79,11 +79,11 @@ A comemoração com troféu e confetes depende de exatamente um candidato com o 
 
 O entorno tem árvores, canteiros, bandeirinhas, bancos, postes e quiosque. A câmera e o zoom são compartilhados entre as duas arenas. A cena usa geometria tridimensional projetada em Canvas, sem modelos externos. A preferência por movimento reduzido mantém a caminhada estática e mostra diretamente a pose final da comemoração. A aba oculta suspende o avanço das animações.
 
-Os modos de simulação e as páginas de teste foram removidos. O antigo endereço `/previa-header` redireciona para a página inicial. Os antigos links `/estadios/trofeu`, `/estadios-3d/trofeu` e `/estadios/entorno` levam às arquibancadas ao vivo. Os testes automatizados de leitura dos dados e geometria permanecem disponíveis por `npm test`.
+Os modos de simulação e as páginas de teste foram removidos. Os aliases e os endereços antigos de teste não estão disponíveis. Os testes automatizados de leitura dos dados e geometria permanecem disponíveis por `npm test`.
 
 ## Hospedagem e visual
 
-Configure a hospedagem para servir `index.html` nas rotas da aplicação e nos aliases; o Vite já faz isso localmente. A tipografia usa Inter via Google Fonts com `display=swap` e alternativa sem serifa do sistema quando indisponível.
+Configure a hospedagem para servir `index.html` nas rotas da aplicação; o Vite já faz isso localmente. A tipografia usa Inter via Google Fonts com `display=swap` e alternativa sem serifa do sistema quando indisponível.
 
 A identidade oficial usa a logo fornecida em `src/assets/brand/logo-arquibancada.png`, exibida pelo componente `Brand` no cabeçalho e no rodapé do painel. O visual parte de **Papel e tinta**: fundo cinza-claro `#F5F5F7`, cartões brancos e texto grafite `#353139`. O vinho `#793947`, os fundos rosés e detalhes verdes acompanham as cores da logo. Vermelho e verde continuam identificando os candidatos. O cabeçalho usa abas em cápsula sobre fundo rosé, com a página selecionada em branco, texto vinho e sombra discreta. A troca entre as abas acontece sem recarregar o documento: o cabeçalho permanece visível enquanto o conteúdo carrega, com blocos suaves de espera e suporte aos botões voltar e avançar do navegador. As abas têm fonte de 16px; no celular, a logo fica centralizada acima da navegação. A paleta oficial fica em `src/theme/palettes.ts` e as regras compartilhadas de tema em `src/theme/theme.css`.
 
