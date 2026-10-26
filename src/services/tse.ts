@@ -1,5 +1,6 @@
 import { states } from '../data/states.ts';
 import type { Result } from '../domain/election/types';
+import { officialWinner } from '../domain/election/winner.ts';
 
 interface RawCandidate {
   n: string;
@@ -16,6 +17,7 @@ interface RawCandidate {
 interface RawResult {
   ele: string;
   t: string;
+  md?: string;
   cdabr: string;
   dg: string;
   hg: string;
@@ -70,6 +72,11 @@ export function parseResult(input: unknown, uf: string): Result {
   }))));
   if (!candidates.length || candidates.some(c => !c.name || !c.number || c.percent > 100))
     throw new Error('Candidaturas indisponíveis ou inválidas.');
+  const mathematicalWinner = officialWinner(candidates, raw.cdabr.toLowerCase() === 'br' && raw.md === 'e');
+  if (mathematicalWinner)
+    candidates.forEach(candidate => {
+      candidate.elected = candidate.number === mathematicalWinner;
+    });
   const progress = numeric(raw.s.pst);
   if (progress > 100)
     throw new Error('Percentual de seções inválido.');

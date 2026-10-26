@@ -51,7 +51,7 @@ O intervalo de 5 segundos é uma cadência de consulta, não uma garantia de pub
 | Arquivo | Responsabilidade |
 | --- | --- |
 | `src/domain/election/start.ts` | Horário explícito de Brasília para abrir os portões |
-| `src/domain/election/winner.ts` | Escolher exatamente um candidato oficialmente eleito |
+| `src/domain/election/winner.ts` | Escolher o eleito individual ou o líder sem empate entre duas candidaturas quando o TSE indicar definição matemática nacional |
 | `src/features/grandstands/scale.ts` | Referência histórica, capacidade e conversão de votos em assentos |
 | `src/features/grandstands/scene/geometry.ts` | Geometria do estádio, câmera e projeção 3D |
 | `src/features/grandstands/scene/entrance.ts` | Estrada, portões e pessoas entrando |

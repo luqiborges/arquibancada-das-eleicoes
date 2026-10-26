@@ -76,3 +76,23 @@ test('vitória oficial antes de 100% aciona vencedor sem depender da liderança'
   assert.equal(officialWinner(result.candidates.map(c => ({ ...c, elected: true }))), undefined);
   assert.equal(officialWinner([]), undefined);
 });
+
+test('definição matemática nacional do TSE reconhece o líder e pode ser retirada', () => {
+  const source = fixture();
+  source.carg[0].agr[0].par[0].cand.forEach(c => { c.e = 'n'; });
+  const defined = parseResult({ ...source, md: 'e' }, 'BR');
+  assert.equal(officialWinner(defined.candidates), '90');
+  for (const md of [undefined, 'n', 's', 'inválido'])
+    assert.equal(officialWinner(parseResult({ ...source, md }, 'BR').candidates), undefined);
+  assert.equal(officialWinner(parseResult({ ...source, cdabr: 'sp', md: 'e' }, 'SP').candidates), undefined);
+  const tied = source.carg[0].agr[0].par[0].cand;
+  tied[1].vap = tied[0].vap;
+  assert.equal(officialWinner(parseResult({ ...source, md: 'e' }, 'BR').candidates), undefined);
+});
+
+test('indicação individual tem precedência sobre definição matemática', () => {
+  assert.equal(officialWinner(parseResult({ ...fixture(), md: 'e' }, 'BR').candidates), '91');
+  const candidates = parseResult(fixture(), 'BR').candidates;
+  assert.equal(officialWinner(candidates.map(c => ({ ...c, elected: true })), true), undefined);
+  assert.equal(officialWinner([ { ...candidates[0], elected: false } ], true), undefined);
+});
